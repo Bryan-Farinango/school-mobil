@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>{{ folder }}</ion-title>
+		<ion-buttons slot="end">
+			<ion-button (click)="openPopover($event)">
+				<ion-icon name="settings"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<div class="cardContainer" *ngIf="folder === 'Screen1'">
+		<div class="card" *ngFor="let post of posts; let i = index">
+			<p style="color: black">Title: {{post.title}}</p>
+			<p style="color: black">Select: {{post.select}}</p>
+			<p style="color: black">Description: {{post.desc}}</p>
+		</div>
+	</div>
+
+	<div *ngIf="folder === 'Screen2'">
+		<form class="form" [formGroup]="postForm" (ngSubmit)="publishPost(postForm.value)">
+			<ion-item>
+				<ion-label position="floating">Title</ion-label>
+				<ion-input type="text" formControlName="title"></ion-input>
+			</ion-item>
+
+			<ng-container *ngFor="let error of errorMsgDesc.title">
+				<div
+					style="color: red"
+					*ngIf="postForm.get('title').hasError(error.type) && (postForm.get('title').dirty || postForm.get('title').touched)"
+				>
+					{{ error.message }}
+				</div>
+			</ng-container>
+
+			<ion-item>
+				<ion-label position="floating">Select</ion-label>
+				<ion-input type="text" formControlName="select"></ion-input>
+			</ion-item>
+
+			<ng-container *ngFor="let error of errorMsgDesc.select">
+				<div
+					style="color: red"
+					*ngIf="postForm.get('select').hasError(error.type) && (postForm.get('select').dirty || postForm.get('select').touched)"
+				>
+					{{ error.message }}
+				</div>
+			</ng-container>
+
+			<ion-item>
+				<ion-label position="floating">Description</ion-label>
+				<ion-input type="text" formControlName="desc"></ion-input>
+			</ion-item>
+
+			<ng-container *ngFor="let error of errorMsgDesc.desc">
+				<div
+					style="color: red"
+					*ngIf="postForm.get('desc').hasError(error.type) && (postForm.get('desc').dirty || postForm.get('desc').touched)"
+				>
+					{{ error.message }}
+				</div>
+			</ng-container>
+
+			<ion-button type="submit" expand="block" [disabled]="!postForm.valid">
+				Create Post
+			</ion-button>
+
+			<label class="ion-text-center" color="danger">{{errorMsg}}</label>
+		</form>
+	</div>
+</ion-content>

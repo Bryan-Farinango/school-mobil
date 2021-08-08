@@ -1,0 +1,7 @@
+{
+  "name": "notibusepn",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

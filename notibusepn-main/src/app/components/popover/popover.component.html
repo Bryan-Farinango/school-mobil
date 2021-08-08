@@ -1,0 +1,11 @@
+<ion-content>
+	<ion-grid>
+		<ion-row style="margin-top: 20px; margin-bottom: 20px; text-align: center">
+			<ion-col> Logged in as: {{ userName }} ({{ userEmail }}) </ion-col>
+		</ion-row>
+
+		<ion-button type="submit" color="danger" expand="block" (click)="signOut()">
+			Sign Out
+		</ion-button>
+	</ion-grid>
+</ion-content>

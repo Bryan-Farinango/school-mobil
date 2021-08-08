@@ -1,0 +1,25 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Welcome to notibusepn</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="auth-form">
+	<ion-grid class="bg-test">
+		<ion-row>
+			<ion-col class="ion-align-self-center">
+				<ion-button [routerLink]="['/register']" expand="block" color="danger">
+					Register
+				</ion-button>
+
+				<ion-item lines="full"></ion-item>
+				<ion-item lines="none"></ion-item>
+
+				<span class="already"> ¿Ya eres usuario? </span>
+				<ion-button [routerLink]="['/login']" expand="block" color="primary">
+					Sign In
+				</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>
