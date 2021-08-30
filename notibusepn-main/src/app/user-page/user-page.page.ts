@@ -22,7 +22,7 @@ export class UserPagePage implements OnInit {
 	public folder: string;
 
 	posts: POST[];
-
+	rutaOptions = ['ruta1', 'ruta2', 'ruta3'];
 	postForm2: FormGroup;
 	successMsg = '';
 	errorMsg = '';
@@ -116,5 +116,10 @@ export class UserPagePage implements OnInit {
 				this.successMsg = '';
 			}
 		);
+	}
+
+	optionsFn(val: any) {
+		const test = val;
+		console.log('valor: ', test.detail.value);
 	}
 }

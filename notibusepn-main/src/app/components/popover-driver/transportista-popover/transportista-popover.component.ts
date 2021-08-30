@@ -4,15 +4,14 @@ import { PopoverController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { DBService } from 'src/app/services/db.service';
-
 @Component({
-	selector: 'app-popover',
-	templateUrl: './popover.component.html',
-	styleUrls: ['./popover.component.scss'],
+	selector: 'app-transportista-popover',
+	templateUrl: './transportista-popover.component.html',
+	styleUrls: ['./transportista-popover.component.scss'],
 })
-export class PopoverComponent implements OnInit {
+export class TransportistaPopoverComponent implements OnInit {
 	userName: string;
 	userEmail: string;
 	dataObjLogin = {
@@ -57,7 +56,6 @@ export class PopoverComponent implements OnInit {
 			}
 		);
 	}
-
 	signOut() {
 		this.popoverController.dismiss();
 		this.authService
@@ -70,12 +68,13 @@ export class PopoverComponent implements OnInit {
 			});
 	}
 
-	redirect1() {
+	publicar() {
 		this.popoverController.dismiss();
-		this.router.navigateByUrl('/user-page/Publicar');
+		this.router.navigateByUrl('/dashboard/Publicar');
 	}
-	redirect2() {
+
+	notificaciones() {
 		this.popoverController.dismiss();
-		this.router.navigateByUrl('/user-page/Comunicados');
+		this.router.navigateByUrl('/dashboard/Notificaciones');
 	}
 }

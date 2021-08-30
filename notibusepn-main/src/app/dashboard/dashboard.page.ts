@@ -7,11 +7,12 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { PopoverController } from '@ionic/angular';
 
 import { PopoverComponent } from '../components/popover/popover.component';
-
+import { TransportistaPopoverComponent } from '../components/popover-driver/transportista-popover/transportista-popover.component';
 import { AuthService } from '../services/auth.service';
 
 import { POST, DBService } from '../services/db.service';
 import { MenuController } from '@ionic/angular';
+
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.page.html',
@@ -65,7 +66,7 @@ export class DashboardPage implements OnInit {
 	}
 	async openPopover(ev: any) {
 		const popover = await this.popoverController.create({
-			component: PopoverComponent,
+			component: TransportistaPopoverComponent,
 			event: ev,
 			cssClass: 'popover_setting',
 			translucent: true,

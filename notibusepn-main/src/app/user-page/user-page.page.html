@@ -1,19 +1,24 @@
 <ion-header [translucent]="true">
-	<ion-toolbar>
-		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
-		</ion-buttons>
+	<ion-toolbar style="padding-top: 10px">
 		<ion-title>{{ folder }}</ion-title>
 		<ion-buttons slot="end">
 			<ion-button (click)="openPopover($event)">
-				<ion-icon name="settings"></ion-icon>
+				<ion-icon name="paper-plane"></ion-icon>
 			</ion-button>
 		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-	<div class="cardContainer" *ngIf="folder === 'Screen1'">
+	<ion-item>
+		<ion-label>Notifications</ion-label>
+		<ion-select value="notifications" interface="action-sheet" (ionChange)="optionsFn($event);">
+			<ion-select-option value="{{option}}" *ngFor="let option of rutaOptions"
+				>{{option}}</ion-select-option
+			>
+		</ion-select>
+	</ion-item>
+	<div class="cardContainer" *ngIf="folder === 'Comunicados'">
 		<div class="card" *ngFor="let post of posts; let i = index">
 			<p style="color: black">Title: {{post.title}}</p>
 			<p style="color: black">Select: {{post.select}}</p>
@@ -21,7 +26,7 @@
 		</div>
 	</div>
 
-	<div *ngIf="folder === 'Screen2'">
+	<div *ngIf="folder === 'Publicar'">
 		<form class="form" [formGroup]="postForm2" (ngSubmit)="publishPost(postForm2.value)">
 			<ion-item>
 				<ion-label position="floating">Title</ion-label>

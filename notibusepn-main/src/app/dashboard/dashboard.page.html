@@ -1,19 +1,16 @@
 <ion-header [translucent]="true">
-	<ion-toolbar>
-		<ion-buttons slot="start">
-			<ion-menu-button></ion-menu-button>
-		</ion-buttons>
+	<ion-toolbar style="padding-top: 10px">
 		<ion-title>{{ folder }}</ion-title>
 		<ion-buttons slot="end">
 			<ion-button (click)="openPopover($event)">
-				<ion-icon name="settings"></ion-icon>
+				<ion-icon name="bus" color="dark"></ion-icon>
 			</ion-button>
 		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-	<div class="cardContainer" *ngIf="folder === 'Screen1'">
+	<div class="cardContainer" *ngIf="folder === 'Notificaciones'">
 		<div class="card" *ngFor="let post of posts; let i = index">
 			<p style="color: black">Title: {{post.title}}</p>
 			<p style="color: black">Select: {{post.select}}</p>
@@ -21,7 +18,7 @@
 		</div>
 	</div>
 
-	<div *ngIf="folder === 'Screen2'">
+	<div *ngIf="folder === 'Publicar'">
 		<form class="form" [formGroup]="postForm" (ngSubmit)="publishPost(postForm.value)">
 			<ion-item>
 				<ion-label position="floating">Title</ion-label>

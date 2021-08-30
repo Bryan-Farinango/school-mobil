@@ -2,29 +2,30 @@
 	<div>
 		<ion-grid>
 			<ion-row style="margin-top: 20px; margin-bottom: 20px; text-align: center">
-				<ion-col style="color: cornflowerblue; font-weight: bold">
-					Bienvenido {{ userName }}</ion-col
+				<ion-col style="color: cornflowerblue; font-weight: bold; font-size: 12px">
+					Transportista <br />
+					{{ userEmail }}</ion-col
 				>
 			</ion-row>
 			<ion-button
 				type="submit"
 				color="light"
 				expand="block"
-				(click)="redirect1()"
+				(click)="publicar()"
 				style="margin-bottom: 10px"
 			>
 				<ion-icon name="clipboard" style="margin-right: 5px"></ion-icon>
-				Notificar
+				Publicar
 			</ion-button>
 			<ion-button
 				type="submit"
 				color="light"
 				expand="block"
-				(click)="redirect2()"
+				(click)="notificaciones()"
 				style="margin-bottom: 10px"
 			>
 				<ion-icon name="mail-unread" style="margin-right: 5px"></ion-icon>
-				Comunicados
+				Notificaciones
 			</ion-button>
 			<ion-button
 				type="submit"

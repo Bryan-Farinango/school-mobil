@@ -81,13 +81,9 @@ export class LoginPage implements OnInit {
 							window.localStorage.setItem('rol', result.objeto.rol);
 							if (result.objeto.rol == 'mobil_user') {
 								//this.router.navigateByUrl('/user-page/Screen1');
-								this.router.navigateByUrl('/user-page/Screen1').then(() => {
-									window.location.reload();
-								});
+								this.router.navigateByUrl('/user-page/Comunicados');
 							} else {
-								this.router.navigateByUrl('/dashboard/Screen1').then(() => {
-									window.location.reload();
-								});
+								this.router.navigateByUrl('/dashboard/Notificaciones');
 							}
 						} else {
 						}
