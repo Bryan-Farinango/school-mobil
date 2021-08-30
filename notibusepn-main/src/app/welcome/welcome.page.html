@@ -1,23 +1,28 @@
-<ion-header>
-	<ion-toolbar>
-		<ion-title>Welcome to notibusepn</ion-title>
-	</ion-toolbar>
-</ion-header>
-
 <ion-content class="auth-form">
 	<ion-grid class="bg-test">
 		<ion-row>
-			<ion-col class="ion-align-self-center">
-				<ion-button [routerLink]="['/register']" expand="block" color="danger">
-					Register
+			<img class="welcome-img" src="../../assets/images/logo-descubrir.png" alt="" />
+			<ion-col class="buttons-welcome">
+				<ion-button
+					[routerLink]="['/register']"
+					expand="block"
+					class="login-buttons"
+					style="margin-bottom: 10px"
+				>
+					Registrate
 				</ion-button>
+				<span class="already" style="font-size: 10px; font-weight: bold">
+					¿Ya eres usuario?
+				</span>
 
-				<ion-item lines="full"></ion-item>
-				<ion-item lines="none"></ion-item>
-
-				<span class="already"> ¿Ya eres usuario? </span>
-				<ion-button [routerLink]="['/login']" expand="block" color="primary">
-					Sign In
+				<ion-button
+					[routerLink]="['/login']"
+					expand="block"
+					color="favorite"
+					class="login-buttons"
+					style="height: 40px"
+				>
+					Inicia Sesión
 				</ion-button>
 			</ion-col>
 		</ion-row>

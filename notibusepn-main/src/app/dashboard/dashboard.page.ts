@@ -11,7 +11,7 @@ import { PopoverComponent } from '../components/popover/popover.component';
 import { AuthService } from '../services/auth.service';
 
 import { POST, DBService } from '../services/db.service';
-
+import { MenuController } from '@ionic/angular';
 @Component({
 	selector: 'app-dashboard',
 	templateUrl: './dashboard.page.html',
@@ -19,7 +19,10 @@ import { POST, DBService } from '../services/db.service';
 })
 export class DashboardPage implements OnInit {
 	public folder: string;
-
+	public appPages = [
+		{ title: 'Screen1', url: '/dashboard/Screen1', icon: 'paper-plane' },
+		{ title: 'Screen2', url: '/dashboard/Screen2', icon: 'paper-plane' },
+	];
 	posts: POST[];
 
 	postForm: FormGroup;
@@ -53,9 +56,13 @@ export class DashboardPage implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		public popoverController: PopoverController,
 		private dbService: DBService,
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private menu: MenuController
 	) {}
-
+	openFirst() {
+		this.menu.enable(true, 'first');
+		this.menu.open('first');
+	}
 	async openPopover(ev: any) {
 		const popover = await this.popoverController.create({
 			component: PopoverComponent,
@@ -93,7 +100,6 @@ export class DashboardPage implements OnInit {
 			desc: new FormControl('', Validators.compose([Validators.required])),
 			timestamp: new FormControl(new Date().getTime()),
 		});
-		
 	}
 
 	publishPost(value) {
@@ -107,7 +113,7 @@ export class DashboardPage implements OnInit {
 					desc: '',
 					timestamp: new Date().getTime(),
 				});
-				
+
 				this.errorMsg = '';
 				this.router.navigateByUrl('/dashboard/Screen1');
 			},

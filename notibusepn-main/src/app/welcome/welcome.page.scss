@@ -1,7 +1,7 @@
-.bg-test{
-	background-color: aqua !important;
+.bg-test {
+	background-color: white !important;
 }
-.auth-form{
+.auth-form {
 	background-color: aqua;
 }
 .divider {
@@ -43,4 +43,23 @@
 	display: block;
 	text-align: center;
 	padding-bottom: 10px;
+}
+
+.buttons-welcome {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	margin-bottom: 2rem;
+}
+.login-buttons {
+	border-radius: 30px;
+	width: 170px;
+	height: 45px;
+}
+
+.welcome-img {
+	margin-top: 8rem;
+	width: 180px;
+	height: 180px;
 }

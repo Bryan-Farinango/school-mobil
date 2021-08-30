@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { DBService } from '../services/db.service';
 
 @Component({
 	selector: 'app-login',
@@ -15,7 +16,9 @@ export class LoginPage implements OnInit {
 	userForm: FormGroup;
 	successMsg = '';
 	errorMsg = '';
-
+	dataObjLogin = {
+		email: '',
+	};
 	errorMsgDesc = {
 		email: [
 			{
@@ -42,7 +45,8 @@ export class LoginPage implements OnInit {
 	constructor(
 		private router: Router,
 		private authService: AuthService,
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private adminService: DBService
 	) {}
 
 	ngOnInit() {
@@ -65,7 +69,33 @@ export class LoginPage implements OnInit {
 		this.authService.signinUser(value).then(
 			(response) => {
 				this.errorMsg = '';
-				this.router.navigateByUrl('/');
+				const { email } = this.userForm.value;
+				this.dataObjLogin.email = email;
+
+				this.adminService.getUserInfo(this.dataObjLogin).subscribe(
+					(result) => {
+						if (result.resultado == true) {
+							window.localStorage.setItem('usuario_id', result.objeto.usuario_id);
+							window.localStorage.setItem('user_web', result.objeto.user_web);
+							window.localStorage.setItem('email', result.objeto.email);
+							window.localStorage.setItem('rol', result.objeto.rol);
+							if (result.objeto.rol == 'mobil_user') {
+								//this.router.navigateByUrl('/user-page/Screen1');
+								this.router.navigateByUrl('/user-page/Screen1').then(() => {
+									window.location.reload();
+								});
+							} else {
+								this.router.navigateByUrl('/dashboard/Screen1').then(() => {
+									window.location.reload();
+								});
+							}
+						} else {
+						}
+					},
+					(error) => {
+						console.log(error);
+					}
+				);
 			},
 			(error) => {
 				this.errorMsg = error.message;

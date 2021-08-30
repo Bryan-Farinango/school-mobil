@@ -12,17 +12,21 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
 	declarations: [AppComponent],
 	entryComponents: [],
 	imports: [
+		FormsModule,
+		ReactiveFormsModule,
 		BrowserModule,
 		IonicModule.forRoot(),
 		AppRoutingModule,
 		AngularFireModule.initializeApp(environment.firebaseConfig),
 		AngularFireAuthModule,
 		AngularFireDatabaseModule,
+		HttpClientModule,
 	],
 	providers: [
 		{

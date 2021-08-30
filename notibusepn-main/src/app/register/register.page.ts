@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { DBService } from '../services/db.service';
 
 @Component({
 	selector: 'app-register',
@@ -12,7 +13,10 @@ export class RegisterPage implements OnInit {
 	userForm: FormGroup;
 	successMsg = '';
 	errorMsg = '';
-
+	dataObjRegister = {
+		email: '',
+		name: '',
+	};
 	errorMsgDesc = {
 		name: [
 			{
@@ -45,7 +49,8 @@ export class RegisterPage implements OnInit {
 	constructor(
 		private router: Router,
 		private authService: AuthService,
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private adminService: DBService
 	) {}
 
 	ngOnInit() {
@@ -66,14 +71,28 @@ export class RegisterPage implements OnInit {
 	}
 
 	signUp(value) {
-		this.authService.createUser(value).then(
-			(response) => {
-				this.errorMsg = '';
-				this.successMsg = 'New user created.';
+		const { name, email } = this.userForm.value;
+		console.log('test', name, email);
+		this.dataObjRegister.email = email;
+		this.dataObjRegister.name = name;
+		this.adminService.registerUser(this.dataObjRegister).subscribe(
+			(result) => {
+				if (result.resultado == true) {
+					this.authService.createUser(value).then(
+						(response) => {
+							this.errorMsg = '';
+							this.successMsg = 'New user created.';
+						},
+						(error) => {
+							this.errorMsg = error.message;
+							this.successMsg = '';
+						}
+					);
+				} else {
+				}
 			},
 			(error) => {
-				this.errorMsg = error.message;
-				this.successMsg = '';
+				console.log(error);
 			}
 		);
 	}
