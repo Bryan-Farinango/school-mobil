@@ -10,26 +10,64 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-	<ion-item>
-		<ion-label>Notifications</ion-label>
-		<ion-select value="notifications" interface="action-sheet" (ionChange)="optionsFn($event);">
-			<ion-select-option value="{{option}}" *ngFor="let option of rutaOptions"
-				>{{option}}</ion-select-option
+	<div *ngIf="folder === 'Comunicados'">
+		<ion-item>
+			<ion-label>Rutas</ion-label>
+			<ion-select
+				value="notifications"
+				interface="action-sheet"
+				(ionChange)="optionsFn($event);"
 			>
-		</ion-select>
-	</ion-item>
-	<div class="cardContainer" *ngIf="folder === 'Comunicados'">
-		<div class="card" *ngFor="let post of posts; let i = index">
-			<p style="color: black">Title: {{post.title}}</p>
-			<p style="color: black">Select: {{post.select}}</p>
-			<p style="color: black">Description: {{post.desc}}</p>
+				<ion-select-option value="{{option.ruta_id}}" *ngFor="let option of responseRutas"
+					>{{option.titulo_ruta}}, Ruta {{option.numero_ruta}}</ion-select-option
+				>
+			</ion-select>
+		</ion-item>
+		<div
+			style="
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-end;
+				align-items: center;
+			"
+		>
+			<ion-icon name="refresh-circle" class="update-button" (click)="getComunicados()"
+				>refresh-circle</ion-icon
+			>
+		</div>
+		<div class="cardContainer">
+			<div *ngIf="responseComunicados?.length === 0" style="margin-top: 7rem">
+				<span style="font-weight: bold">Seleccione una ruta</span>
+			</div>
+			<div class="card" *ngFor="let post of responseComunicados">
+				<div style="border-bottom: 1px solid lightgrey; padding-bottom: 5px">
+					<span
+						style="font-weight: bold; color: red"
+						*ngIf="post.rol === 'transportista' "
+						>Transportista</span
+					>
+					<br />
+					<span style="font-weight: bold; color: cornflowerblue"
+						>{{post.comunicado_asunto}}</span
+					>
+
+					<br />
+					<span style="font-size: 12px">{{post.comunicado_titulo}}</span>
+				</div>
+				<span style="margin-top: 5px; font-size: 10px">{{post.comunicado_mensaje}}</span>
+				<br />
+				<br />
+				<span style="font-size: 10px; margin-bottom: 3px"
+					>{{post.nombres_emisor}} {{post.apellidos_emisor}}</span
+				>
+				<span style="font-size: 10px; color: #7ed957">{{post.comunicado_fecha}}</span>
+			</div>
 		</div>
 	</div>
-
 	<div *ngIf="folder === 'Publicar'">
 		<form class="form" [formGroup]="postForm2" (ngSubmit)="publishPost(postForm2.value)">
 			<ion-item>
-				<ion-label position="floating">Title</ion-label>
+				<ion-label position="floating">Título</ion-label>
 				<ion-input type="text" formControlName="title"></ion-input>
 			</ion-item>
 
@@ -43,8 +81,12 @@
 			</ng-container>
 
 			<ion-item>
-				<ion-label position="floating">Select</ion-label>
-				<ion-input type="text" formControlName="select"></ion-input>
+				<ion-label>Asuntos</ion-label>
+				<ion-select value="notifications" interface="action-sheet" formControlName="select">
+					<ion-select-option value="{{option}}" *ngFor="let option of temaOptions"
+						>{{option}}</ion-select-option
+					>
+				</ion-select>
 			</ion-item>
 
 			<ng-container *ngFor="let error of errorMsgDesc.select">
@@ -57,7 +99,25 @@
 			</ng-container>
 
 			<ion-item>
-				<ion-label position="floating">Description</ion-label>
+				<ion-label>Rutas</ion-label>
+				<ion-select
+					value="notifications"
+					interface="action-sheet"
+					(ionChange)="postChange($event);"
+				>
+					<ion-select-option
+						value="{{option.ruta_id}}"
+						*ngFor="let option of responseRutas"
+						>{{option.titulo_ruta}}, Ruta {{option.numero_ruta}}</ion-select-option
+					>
+				</ion-select>
+			</ion-item>
+
+			<ng-container *ngIf="error">
+				<div style="color: red">Ruta requerida para publicar</div>
+			</ng-container>
+			<ion-item>
+				<ion-label position="floating">Mensaje</ion-label>
 				<ion-input type="text" formControlName="desc"></ion-input>
 			</ion-item>
 
@@ -71,7 +131,7 @@
 			</ng-container>
 
 			<ion-button type="submit" expand="block" [disabled]="!postForm2.valid">
-				Create Post
+				Crear publicación
 			</ion-button>
 
 			<label class="ion-text-center" color="danger">{{errorMsg}}</label>

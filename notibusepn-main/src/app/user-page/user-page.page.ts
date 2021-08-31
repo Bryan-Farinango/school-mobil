@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
+import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -12,6 +12,7 @@ import { AuthService } from '../services/auth.service';
 
 import { POST, DBService } from '../services/db.service';
 import { MenuController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-user-page',
@@ -20,42 +21,65 @@ import { MenuController } from '@ionic/angular';
 })
 export class UserPagePage implements OnInit {
 	public folder: string;
-
+	temaOptions = [];
 	posts: POST[];
 	rutaOptions = ['ruta1', 'ruta2', 'ruta3'];
 	postForm2: FormGroup;
 	successMsg = '';
 	errorMsg = '';
+	error: boolean;
+	dataObjGetRuta = {
+		email: '',
+	};
+	dataObjPublicar = {
+		ruta_id: '',
+		titulo: '',
+		asunto: '',
+		mensaje: '',
+		fecha: <string>'',
+		emisor_email: '',
+	};
 
+	dataObjGetComunicados = {
+		ruta_id: '',
+	};
 	errorMsgDesc = {
 		title: [
 			{
 				type: 'required',
-				message: 'Provide title.',
+				message: 'Título requerido.',
 			},
 		],
 		select: [
 			{
 				type: 'required',
-				message: 'Select is required.',
+				message: 'Asunto requerido.',
 			},
 		],
 		desc: [
 			{
 				type: 'required',
-				message: 'Description is required.',
+				message: 'Mensaje requerido.',
 			},
 		],
 	};
-
+	public userEmail;
+	responseRutas: any;
+	responseComunicados: any;
+	auxIdRuta: any;
 	constructor(
+		private datePipe: DatePipe,
 		private router: Router,
 		private authService: AuthService,
 		private activatedRoute: ActivatedRoute,
 		public popoverController: PopoverController,
 		private dbService: DBService,
-		private fb: FormBuilder
-	) {}
+		private fb: FormBuilder,
+		public adminService: DBService
+	) {
+		this.temaOptions = environment.themeOptions;
+		this.error = false;
+	}
 
 	async openPopover(ev: any) {
 		const popover = await this.popoverController.create({
@@ -72,12 +96,30 @@ export class UserPagePage implements OnInit {
 			(response) => {
 				if (response === null) {
 					this.router.navigateByUrl('welcome');
+				} else {
+					this.userEmail = response.email;
+					this.dataObjGetRuta.email = this.userEmail;
+					this.adminService.getRutasForUser(this.dataObjGetRuta).subscribe(
+						(result) => {
+							if (result.resultado == true) {
+								this.responseRutas = result.objeto;
+
+								console.log(this.responseRutas);
+							} else {
+							}
+						},
+						(error) => {
+							console.log(error);
+						}
+					);
 				}
 			},
 			(error) => {
 				console.log(error);
 			}
 		);
+
+		this.getComunicados();
 
 		this.folder = this.activatedRoute.snapshot.paramMap.get('id');
 
@@ -98,28 +140,58 @@ export class UserPagePage implements OnInit {
 
 	publishPost(value) {
 		//console.log(this.postForm.value)
-		this.dbService.createPost(value).then(
-			(response) => {
-				this.postForm2.reset();
-				this.postForm2.setValue({
-					title: '',
-					select: '',
-					desc: '',
-					timestamp: new Date().getTime(),
-				});
 
-				this.errorMsg = '';
-				this.router.navigateByUrl('/dashboard/Screen1');
+		const { title, select, desc, timestamp } = this.postForm2.value;
+		if (this.auxIdRuta === undefined) {
+			this.error = true;
+
+			return;
+		}
+		console.log(this.auxIdRuta);
+		this.dataObjPublicar.titulo = title;
+		this.dataObjPublicar.asunto = select;
+		this.dataObjPublicar.mensaje = desc;
+		this.dataObjPublicar.fecha = this.datePipe.transform(timestamp, 'dd/MMM/yyyy hh:mm:ss');
+		this.dataObjPublicar.ruta_id = this.auxIdRuta;
+		this.dataObjPublicar.emisor_email = this.userEmail;
+		this.adminService.publicarComunicado(this.dataObjPublicar).subscribe(
+			(result) => {
+				if (result.resultado == true) {
+					this.router.navigateByUrl('/user-page/Comunicados');
+				} else {
+				}
 			},
 			(error) => {
-				this.errorMsg = error.message;
-				this.successMsg = '';
+				console.log(error);
 			}
 		);
+		console.log(this.dataObjPublicar);
 	}
 
 	optionsFn(val: any) {
 		const test = val;
-		console.log('valor: ', test.detail.value);
+		this.auxIdRuta = test.detail.value;
+		this.getComunicados();
+	}
+
+	postChange(val: any) {
+		const test = val;
+		this.auxIdRuta = test.detail.value;
+	}
+
+	getComunicados() {
+		this.dataObjGetComunicados.ruta_id = this.auxIdRuta;
+		this.adminService.getComunicados(this.dataObjGetComunicados).subscribe(
+			(result) => {
+				if (result.resultado == true) {
+					this.responseComunicados = result.comunicados;
+					console.log(this.responseComunicados);
+				} else {
+				}
+			},
+			(error) => {
+				console.log(error);
+			}
+		);
 	}
 }

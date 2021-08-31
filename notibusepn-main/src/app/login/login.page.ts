@@ -23,21 +23,21 @@ export class LoginPage implements OnInit {
 		email: [
 			{
 				type: 'required',
-				message: 'Provide email.',
+				message: 'Email requerido.',
 			},
 			{
 				type: 'pattern',
-				message: 'Email is not valid.',
+				message: 'Email no válido.',
 			},
 		],
 		password: [
 			{
 				type: 'required',
-				message: 'Password is required.',
+				message: 'Contraseña requerida.',
 			},
 			{
 				type: 'minlength',
-				message: 'Password length should be 6 characters long.',
+				message: 'La contraseña debe tener mínimo 6 caracteres.',
 			},
 		],
 	};

@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+	themeOptions: ['General', 'Asistencia', 'Noticias'],
 	apiUrl: 'http://157.245.116.195:8888/api',
 	production: false,
 	firebaseConfig: {

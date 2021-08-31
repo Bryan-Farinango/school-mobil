@@ -14,6 +14,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 @NgModule({
 	declarations: [AppComponent],
 	entryComponents: [],
@@ -33,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
 			provide: RouteReuseStrategy,
 			useClass: IonicRouteStrategy,
 		},
+		DatePipe,
 	],
 	bootstrap: [AppComponent],
 })

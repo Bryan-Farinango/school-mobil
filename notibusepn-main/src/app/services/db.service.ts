@@ -61,4 +61,42 @@ export class DBService {
 		}
 		return throwError(message);
 	}
+
+	getRutasForUser(data: any) {
+		return this.httpClient
+			.post<any>(this.endpoint + '/get-ruta-mobile', JSON.stringify(data), this.httpHeader)
+			.pipe(retry(1), catchError(this.processError));
+	}
+
+	publicarComunicado(data: any) {
+		return this.httpClient
+			.post<any>(
+				this.endpoint + '/publicar-comunicado',
+				JSON.stringify(data),
+				this.httpHeader
+			)
+			.pipe(retry(1), catchError(this.processError));
+	}
+
+	getComunicados(data: any) {
+		return this.httpClient
+			.post<any>(this.endpoint + '/get-comunicados', JSON.stringify(data), this.httpHeader)
+			.pipe(retry(1), catchError(this.processError));
+	}
+
+	getRutaTransporte(data: any) {
+		return this.httpClient
+			.post<any>(
+				this.endpoint + '/get-ruta-mobile-transporte',
+				JSON.stringify(data),
+				this.httpHeader
+			)
+			.pipe(retry(1), catchError(this.processError));
+	}
+
+	delComunicados(data: any) {
+		return this.httpClient
+			.post<any>(this.endpoint + '/del-comunicados', JSON.stringify(data), this.httpHeader)
+			.pipe(retry(1), catchError(this.processError));
+	}
 }

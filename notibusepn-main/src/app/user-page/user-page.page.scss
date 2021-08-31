@@ -6,7 +6,7 @@ ion-icon {
 .cardContainer {
 	display: grid;
 	place-items: center;
-	margin: 40px 0px;
+	margin: 10px 0px;
 }
 
 .card {
@@ -16,10 +16,17 @@ ion-icon {
 	flex-direction: column;
 	background-color: white;
 	border: 1px solid lightgray;
-	padding: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border-radius: 20px;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24), 0 10px 20px rgba(0, 0, 0, 0.36);
-	margin-bottom: 60px;
+	margin-bottom: 20px;
+}
+
+.update-button {
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
 }

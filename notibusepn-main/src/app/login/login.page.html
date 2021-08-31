@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-toolbar color="primary">
-		<ion-title>Login</ion-title>
+		<ion-title>Sesión</ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -21,7 +21,7 @@
 		</ng-container>
 
 		<ion-item>
-			<ion-label position="floating">Password</ion-label>
+			<ion-label position="floating">Contraseña</ion-label>
 			<ion-input
 				type="password"
 				formControlName="password"
@@ -39,9 +39,17 @@
 			</div>
 		</ng-container>
 
-		<ion-button type="submit" expand="block" [disabled]="!userForm.valid">Signin</ion-button>
+		<ion-button type="submit" expand="block" [disabled]="!userForm.valid"
+			>Iniciar Sesión</ion-button
+		>
 
 		<label class="ion-text-center" color="danger">{{errorMsg}}</label>
 	</form>
-	<p class="ion-text-center">Not registered yet? <a (click)="goToSignup()">Register</a></p>
+	<p class="ion-text-center">
+		Aun no estas registrado?
+		<a (click)="goToSignup()">
+			<br />
+			Regístrate</a
+		>
+	</p>
 </ion-content>

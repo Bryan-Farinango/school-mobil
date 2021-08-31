@@ -1,13 +1,13 @@
 <ion-header>
 	<ion-toolbar color="danger">
-		<ion-title>User Registration</ion-title>
+		<ion-title>Registro</ion-title>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 	<form class="form" [formGroup]="userForm" (ngSubmit)="signUp(userForm.value)">
 		<ion-item>
-			<ion-label position="floating">Name</ion-label>
+			<ion-label position="floating">Nombre</ion-label>
 			<ion-input type="text" formControlName="name"></ion-input>
 		</ion-item>
 
@@ -35,7 +35,7 @@
 		</ng-container>
 
 		<ion-item>
-			<ion-label position="floating">Password</ion-label>
+			<ion-label position="floating">Contraseña</ion-label>
 			<ion-input
 				type="password"
 				formControlName="password"
@@ -53,10 +53,18 @@
 			</div>
 		</ng-container>
 
-		<ion-button type="submit" expand="block" [disabled]="!userForm.valid">Register</ion-button>
+		<ion-button type="submit" expand="block" [disabled]="!userForm.valid"
+			>Registrarse</ion-button
+		>
 
 		<label class="ion-text-center" color="danger">{{errorMsg}}</label>
 		<label class="ion-text-center" color="success">{{successMsg}}</label>
 	</form>
-	<p class="ion-text-center">Already registered? <a (click)="goToLogin()">Login</a></p>
+	<p class="ion-text-center">
+		Ya tienes una cuenta ?
+		<a (click)="goToLogin()">
+			<br />
+			Iniciar Sesión</a
+		>
+	</p>
 </ion-content>
