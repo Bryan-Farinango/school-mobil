@@ -3,7 +3,7 @@
 El proyecto School-web-mobil corresponde a una app móvil desarrollada con IONIC 5 Angular la cual tiene un enfoque de comunicación entre padres de familia y transportistas de una determinada ruta Escolar.
 
 ### **Video demostrativo**
-* enlace_youtube
+* [Manual usuario video YouTube](https://www.youtube.com/watch?v=ZHiUGJxOSGo)
 ## Desarrollado por ✒️
 * **Bryan Farinango** - [Bryan-Farinango](https://gist.github.com/Bryan-Farinango)
 * **Josselyn Vela** - [JosselynVela](https://github.com/JosselynVela)
