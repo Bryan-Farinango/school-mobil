@@ -1,4 +1,6 @@
 export const environment = {
+	themeOptions: ['General', 'Asistencia', 'Noticias'],
+	apiUrl: 'http://157.245.116.195:8888/api',
 	production: true,
 	firebaseConfig: {
 		apiKey: 'AIzaSyAtp_1k7RgfaMiPWuPA6fQYVxEUnJ2-c20',

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "541924621862",
+    "project_id": "notibusepn",
+    "storage_bucket": "notibusepn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541924621862:android:71f4424367a6a6eea670e7",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541924621862-qusnil7qbnp665ta6ahjvc1v2hq30ncd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWAZJ_nFYs2pP6teqbeLOgZHE_l9AlNAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541924621862-qusnil7qbnp665ta6ahjvc1v2hq30ncd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
