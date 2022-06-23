@@ -7,13 +7,12 @@ export const environment = {
 	apiUrl: 'http://157.245.116.195:8888/api',
 	production: false,
 	firebaseConfig: {
-		apiKey: 'AIzaSyAtp_1k7RgfaMiPWuPA6fQYVxEUnJ2-c20',
-		authDomain: 'notibusepn.firebaseapp.com',
-		projectId: 'notibusepn',
-		storageBucket: 'notibusepn.appspot.com',
-		messagingSenderId: '541924621862',
-		appId: '1:541924621862:web:e79855d1dbab1820a670e7',
-		measurementId: 'G-T1RCLDYQJB',
+		apiKey: 'AIzaSyBpDAB2JifxO--5ELLqee47eW0Z3bk3RdA',
+		authDomain: 'shool-web-mobile.firebaseapp.com',
+		projectId: 'shool-web-mobile',
+		storageBucket: 'shool-web-mobile.appspot.com',
+		messagingSenderId: '961121696554',
+		appId: '1:961121696554:web:d1d79ca7ee1022f0e4fc53',
 	},
 };
 
